@@ -24,15 +24,13 @@ check_terragrunt_version() {
   fi
 
   if [ "$(printf '%s\n' "$minimum_supported_version" "$current_version" | sort -V | head -1)" = "$minimum_supported_version" ]; then
-    echo "Terragrunt version $current_version is >= $minimum_supported_version"
-
     return 0
-  else
-    echo "Error: Terragrunt version $current_version is less than the minimum supported version $minimum_supported_version" >&2
-    echo "Please upgrade Terragrunt to version $minimum_supported_version or later" >&2
-
-    exit 1
   fi
+
+  echo "Error: Terragrunt version $current_version is less than the minimum supported version $minimum_supported_version" >&2
+  echo "Please upgrade Terragrunt to version $minimum_supported_version or later" >&2
+
+  exit 1
 }
 
 format_files() {
